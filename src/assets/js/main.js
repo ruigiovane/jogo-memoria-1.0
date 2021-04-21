@@ -36,6 +36,7 @@ const shuffle = function() {
 
   for (let i = cards.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
+    
     [cards[i], cards[j]] = [cards[j], cards[i]];
   }
 
@@ -43,15 +44,23 @@ const shuffle = function() {
 }
 
 const selectImagesForThisRound = function() {
-  var difference = ((images.length) - (numberOfCards() / 2));
-  
   var imagesForThisRound = [...images];
-  for (var i = 0; i < difference; i++) {
+  
+  var difference = ((images.length) - (numberOfCards() / 2));
+  if (difference > 0)
+    imagesForThisRound = randomlyRemoveImagesThatWontBeUsed(difference, imagesForThisRound);
+
+  return [...imagesForThisRound, ...imagesForThisRound];
+}
+
+const randomlyRemoveImagesThatWontBeUsed = function(numberOfImagesToRemove, imagesForThisRound) {
+  for (var i = 0; i < numberOfImagesToRemove; i++) {
     var item = imagesForThisRound[Math.floor(Math.random() * imagesForThisRound.length)];
+
     imagesForThisRound.splice(imagesForThisRound.indexOf(item), 1);
   }
 
-  return [...imagesForThisRound, ...imagesForThisRound];
+  return imagesForThisRound;
 }
 
 const setCards = function(cardImages) {
