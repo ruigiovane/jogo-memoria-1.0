@@ -17,7 +17,7 @@ const images = [
   'lion.png'
 ];
 
-var flipCardBackImage = '../images/back_blue.png';
+var cardBackImage = '../images/back_blue.png';
 
 var removedCards;
 
@@ -74,13 +74,13 @@ const setCards = function(cardImages) {
       var image = `../images/${cardImages[counter]}`;
 
       cards += `
-        <div id="flip-card-${counter}" class="flip-card">
-          <div class="flip-card-inner" data-id-related="card-image-${counter}">
-            <div class="flip-card-front">
-            <img src="${flipCardBackImage}" class="card-image" />
+        <div id="card-${counter}" class="card">
+          <div class="card-inner" data-id-related="card-image-${counter}">
+            <div class="card-back">
+              <img src="${cardBackImage}" class="card-image" />
             </div>
-            <div class="flip-card-back">
-              <img src="${image}" data-trigger-remove="flip-card-${counter}" id="card-image-${counter}" class="card-image" />
+            <div class="card-front">
+              <img src="${image}" data-trigger-remove="card-${counter}" id="card-image-${counter}" class="card-image" />
             </div>
           </div>
         </div>
@@ -106,7 +106,7 @@ const resetGrid = function() {
 }
 
 const setCardsEvents = function() {
-  [...document.getElementsByClassName('flip-card-inner')].forEach(el => {
+  [...document.getElementsByClassName('card-inner')].forEach(el => {
     el.addEventListener('click', flipCard)
   });
 }
@@ -165,7 +165,7 @@ const numberOfCards = function() {
 }
 
 const unflipCards = function() {
-  var flipCardInnerList = [].slice.call(document.getElementsByClassName('flip-card-inner'));
+  var flipCardInnerList = [].slice.call(document.getElementsByClassName('card-inner'));
  
   flipCardInnerList.forEach(element => element.classList.remove('flipped-card'));
 }
