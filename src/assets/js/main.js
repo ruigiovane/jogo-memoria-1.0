@@ -43,7 +43,7 @@ const shuffle = function() {
 }
 
 const selectImagesForThisRound = function() {
-  var difference = ((images.length * 2) - (numberOfCards())) / 2;
+  var difference = ((images.length) - (numberOfCards() / 2));
   
   var imagesForThisRound = [...images];
   for (var i = 0; i < difference; i++) {
